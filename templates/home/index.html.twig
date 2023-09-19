@@ -16,5 +16,13 @@
         <li>Your controller at <code><a href="{{ '/Users/coding/Documents/coding/Github/L2_Paris_Symfony_Myblog/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
         <li>Your template at <code><a href="{{ '/Users/coding/Documents/coding/Github/L2_Paris_Symfony_Myblog/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
     </ul>
+    {% if app.user %}
+        <p>Logged in as {{ app.user.username }}</p>
+        <a href="{{ path("app_logout") }}">Logout</a>
+    {% else %}
+        <p>Not logged in</p>
+        <a href="{{ path("app_register") }}">Register</a>
+        <a href="{{ path("app_login") }}">Login</a>
+    {% endif %}
 </div>
 {% endblock %}
