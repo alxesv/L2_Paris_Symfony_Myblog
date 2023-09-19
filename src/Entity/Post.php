@@ -28,8 +28,8 @@ class Post
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $image = [];
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
@@ -37,6 +37,9 @@ class Post
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'posts')]
     private Collection $tag;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
 
     public function __construct()
     {
@@ -96,12 +99,12 @@ class Post
         return $this;
     }
 
-    public function getImage(): array
+    public function getImage(): string
     {
         return $this->image;
     }
 
-    public function setImage(array $image): static
+    public function setImage(string $image): static
     {
         $this->image = $image;
 
@@ -140,6 +143,18 @@ class Post
     public function removeTag(Tag $tag): static
     {
         $this->tag->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
