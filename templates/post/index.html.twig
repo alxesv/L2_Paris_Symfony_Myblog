@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}liste des posts{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>Liste de vos posts:</h1>
+
+    <a href="{{ path('app_post_create')}}">Create</a>
+
+    {# DEBUT BARRE DE RECHERCHE #}
+    {# FIN BARRE DE RECHERCHE #}
+
+    {# DEBUT LISTE POSTS #}
+    {% for post in posts %}
+        <div class="card">
+            <div class="card__content">
+                <a href="#" class="card__hypertext">{{ post.title }}</a>
+                <p class="card__text">{{ post.summary }}</p>
+                <p class="card__date">{{ post.getCreatedAt()|date('Y-m-d H:i:s')}}</p>
+            </div>
+            <img src="#" alt="#" class="card__photo">
+            <td><a href="{{ path('app_post_show', {'id': post.id}) }}">Détail</a></td>
+            <td><a href="{{ path('app_post_edit', {'id': post.id}) }}">Editer</a></td>
+            <td><a href="{{ path('app_post_delete', {'id': post.id}) }}">Supprimer</a></td>
+        </div>
+    {% endfor %}
+    {# FIN LISTE POSTS #}
+
+</div>
+{% endblock %}
