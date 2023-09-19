@@ -21,3 +21,16 @@
 
 .DS_Store
 .env
+
+/web/bundles/
+/app/bootstrap.php.cache
+/app/cache/*
+app/cache/* (debug)
+/app/logs/*
+/build/
+/vendor/
+/bin/
+/composer.phar
+/.idea/ (debug)
+.idea/ (debug)
+.idea
