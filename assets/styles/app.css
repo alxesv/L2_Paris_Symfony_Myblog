@@ -1,3 +1,41 @@
 body {
-    background-color: white;
+    background-color: lightgray;
+}
+
+.flexForm{
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-metadata .metadata{
+    margin-right: 0;
+}
+
+.label-success, .label-warning, .label-info, .label-default{
+    margin-right: 10px;
+}
+
+div.pop-up {
+    display: none;
+    position: absolute;
+    width: 1280px;
+    padding: 10px;
+    background: #eeeeee;
+    color: #000000;
+    border: 1px solid #1a1a1a;
+    font-size: 90%;
+}
+.absolute{
+    position: absolute;
+}
+
+#search_parse1 .mb-3.row:last-of-type .col-sm-10, #search_parse2 .mb-3.row:last-of-type .col-sm-10{
+    text-align: right;
+}
+.form-control{
+    margin: 10px;
+}
+.fa-minus, .fa-plus{
+    cursor: pointer;
 }
