@@ -23,11 +23,7 @@ class PostType extends AbstractType
             ->add('title')
             ->add('summary')
             ->add('content')
-            ->add('slug')
-            ->add('image', FileType::class, [
-                'label' => 'Image (JPG, PNG, GIF, etc.)', // Étiquette du champ
-                'mapped' => true,
-            ]);
+            ->add('slug');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

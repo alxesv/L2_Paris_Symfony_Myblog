@@ -14,11 +14,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController
 {
+    #[Route('/post', name: 'app_post_front')]
+    public function listFront(EntityManagerInterface $entityManager): Response
+    {
+        $postEntity = $entityManager->getRepository(Post::class);
+        $posts = $postEntity->findAll();
+
+        return $this->render('post/post.html.twig', [
+            'posts' => $posts,
+        ]);
+    }
+
     #[Route('/back/post', name: 'app_post')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $postEntity = $entityManager->getRepository(Post::class);
-        $posts = $postEntity->findAll();
+        $posts = $postEntity->findBy(["user" => $this->getUser()], ["createdAt" => "ASC"]);
 
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
@@ -89,10 +100,13 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setCreatedAt(new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris')));
             $post->setUser($this->getUser());
+
+            $post->setImage("/Users/lucasdeniel/Downloads/MyFlow/Snapchat-1967704983.jpg");
+
             $entityManager->persist($post);
             $entityManager->flush();
 
-            return $this->redirectToRoute('post_list');
+            return $this->redirectToRoute('app_post');
         }
 
         return $this->render('post/create.html.twig', [
