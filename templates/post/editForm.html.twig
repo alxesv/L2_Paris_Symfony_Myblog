@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit{% endblock %}
+
+{% block body %}
+    <h1>Edit</h1>
+    {{ include('post/_form.html.twig',{
+        form:form,
+        'button_label':'edit'|trans,
+    }, with_context =  false) }}
+{% endblock %}
