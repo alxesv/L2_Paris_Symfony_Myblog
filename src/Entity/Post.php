@@ -41,6 +41,9 @@ class Post
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $publicated_at = null;
+
     public function __construct()
     {
         $this->tag = new ArrayCollection();
@@ -155,6 +158,18 @@ class Post
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getPublicatedAt(): ?\DateTimeInterface
+    {
+        return $this->publicated_at;
+    }
+
+    public function setPublicatedAt(\DateTimeInterface $publicated_at): static
+    {
+        $this->publicated_at = $publicated_at;
 
         return $this;
     }
