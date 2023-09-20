@@ -11,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Spipu\Html2Pdf\Html2Pdf;
+
+
 
 class PostController extends AbstractController
 {
@@ -72,7 +75,7 @@ class PostController extends AbstractController
         return $this->redirectToRoute('app_post');
     }
 
-    #[Route('/back/post/show/{id}', name: 'app_post_show')]
+    #[Route('/post/show/{id}', name: 'app_post_show')]
     public function show(Request $request, EntityManagerInterface $entityManager, $id): Response
     {
         $postEntity = $entityManager->getRepository(Post::class);
@@ -85,6 +88,20 @@ class PostController extends AbstractController
         return $this->render('post/show.html.twig', [
             'post' => $post,
         ]);
+    }
+
+    #[Route('/post/download/{id}', name: 'app_post_download')]
+    public function downloadAsPdf($id, EntityManagerInterface $entityManager): void
+    {
+        $html2pdf = new Html2Pdf();
+        $postEntity = $entityManager->getRepository(Post::class);
+        $post = $postEntity->find($id);
+        $html = $this->renderView('post/dl.show.html.twig', [
+            'post' => $post,
+        ]);
+        $html2pdf->writeHTML($html);
+        $name = $post->getSlug();
+        $html2pdf->output("$name.pdf");
     }
 
     /**
