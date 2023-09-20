@@ -39,9 +39,13 @@ class TagController extends AbstractController
             throw $this->createNotFoundException('Le tag n\'existe pas.');
         }
 
-        $entityManager->remove($tag);
-        $entityManager->flush();
-
+        try {
+            $entityManager->remove($tag);
+            $entityManager->flush();
+            $this->addFlash('message', 'Le tag a bien été supprimé !');
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Une erreur s\'est produite lors de la suppression du tag : ' . $e->getMessage());
+        }
         return $this->redirectToRoute('app_tag');
     }
 
@@ -54,8 +58,15 @@ class TagController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $entityManager->persist($tag);
-            $entityManager->flush();
+            try {
+                $entityManager->persist($tag);
+                $entityManager->flush();
+
+                $this->addFlash('message', 'Le tag a bien été créé !');
+            } catch (\Exception $e) {
+
+                $this->addFlash('error', 'Une erreur s\'est produite lors de la création du tag : ' . $e->getMessage());
+            }
 
             return $this->redirectToRoute('app_tag');
         }
@@ -74,7 +85,13 @@ class TagController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $entityManager->flush();
+            try {
+                $entityManager->flush();
+                $this->addFlash('message', 'Le tag a bien été modifié !');
+            } catch (\Exception $e) {
+
+                $this->addFlash('error', 'Une erreur s\'est produite lors de la modification du tag : ' . $e->getMessage());
+            }
             return $this->redirectToRoute('app_tag');
 
         }

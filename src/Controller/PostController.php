@@ -9,7 +9,6 @@ use App\Form\PostType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -76,9 +75,13 @@ class PostController extends AbstractController
 
         }
 
-        $entityManager->remove($post);
-        $entityManager->flush();
-
+        try {
+            $entityManager->remove($post);
+            $entityManager->flush();
+            $this->addFlash('message', 'Le post a bien été supprimé !');
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Une erreur s\'est produite lors de la suppression du post : ' . $e->getMessage());
+        }
         return $this->redirectToRoute('app_post');
     }
 
@@ -149,8 +152,15 @@ class PostController extends AbstractController
                 $post->setImage($newFilename);
             }
 
-            $entityManager->persist($post);
-            $entityManager->flush();
+            try {
+                $entityManager->persist($post);
+                $entityManager->flush();
+
+                $this->addFlash('message', 'Le post a bien été créé !');
+            } catch (\Exception $e) {
+
+                $this->addFlash('error', 'Une erreur s\'est produite lors de la création du post : ' . $e->getMessage());
+            }
 
             return $this->redirectToRoute('app_post');
         }
@@ -202,7 +212,13 @@ class PostController extends AbstractController
                 $post->setImage($newFilename);
             }
 
-            $entityManager->flush();
+            try {
+                $entityManager->flush();
+                $this->addFlash('message', 'Le post a bien été modifié !');
+            } catch (\Exception $e) {
+
+                $this->addFlash('error', 'Une erreur s\'est produite lors de la modification du post : ' . $e->getMessage());
+            }
             return $this->redirectToRoute('app_post');
         }
 

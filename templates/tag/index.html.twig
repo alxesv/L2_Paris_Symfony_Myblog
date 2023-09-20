@@ -5,6 +5,12 @@
 {% block body %}
 
     <div class="example-wrapper">
+        {% for message in app.flashes('message') %}
+            <p class="flash__message">{{ message }}</p>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <p class="flash__error">{{ message }}</p>
+        {% endfor %}
         <h1>Liste de vos posts:</h1>
 
         <a href="{{ path('app_tag_create') }}">Create</a>
