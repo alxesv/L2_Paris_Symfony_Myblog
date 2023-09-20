@@ -19,9 +19,9 @@
                 <p class="card__date">{{ post.getPublicatedAt()|date('Y-m-d H:i:s')}}</p>
             </div>
             <img src="{{ asset('uploads/images/' ~ post.image) }}" alt="post_image" style="width: 100px; height: 100px">
-            <td><a href="{{ path('app_post_show', {'id': post.id}) }}">Détail</a></td>
-            <td><a href="{{ path('app_post_edit', {'id': post.id}) }}">Editer</a></td>
-            <td><a href="{{ path('app_post_delete', {'id': post.id}) }}">Supprimer</a></td>
+            <a href="{{ path('app_post_show', {'id': post.id}) }}">Détail</a>
+            <a href="{{ path('app_post_edit', {'id': post.id}) }}">Editer</a>
+            <a href="{{ path('app_post_delete', {'id': post.id}) }}">Supprimer</a>
         </div>
     {% endfor %}
     {# FIN LISTE POSTS #}

@@ -54,7 +54,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/back/post/delete/{id}', name: 'app_post_delete')]
-    public function delete(Request $request, EntityManagerInterface $entityManager, $id): Response
+    public function delete(EntityManagerInterface $entityManager, $id): Response
     {
         $postRepository = $entityManager->getRepository(Post::class);
         $post = $postRepository->find($id);
