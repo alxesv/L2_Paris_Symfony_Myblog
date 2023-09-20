@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Detail du post{% endblock %}
+{% block header %} {% endblock %}
 {% block body %}
 
-    <article class="post" style="margin:0 5rem">
+    <div class="post" style="margin:0 5rem">
         <h1>{{ post.title }}</h1>
 
         <p class="post-metadata">
@@ -14,11 +13,7 @@
 
         <img src="https://picsum.photos/seed/{{ post.slug }}/200/300" alt="" style="float:left;padding-right:2rem">
         <div class="content" style="text-align: justify">
-        {{ post.content|markdown_to_html }}
+            {{ post.content|markdown_to_html }}
         </div>
-        {% if app.user %}
-        <div class="clearfix"></div>
-        <span><a href="{{ path("app_post_download", {'id': post.id}) }}" target="_blank"><i class="fa fa-download"></i>Download as pdf</a></span>
-        {% endif %}
-    </article>
+    </div>
 {% endblock %}
