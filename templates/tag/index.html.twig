@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}liste des posts{% endblock %}
+{% block title %}liste des tags{% endblock %}
 
 {% block body %}
 
@@ -11,7 +11,7 @@
         {% for message in app.flashes('error') %}
             <p class="flash__error">{{ message }}</p>
         {% endfor %}
-        <h1>Liste de vos posts:</h1>
+        <h1>Liste des tags:</h1>
 
         <a href="{{ path('app_tag_create') }}">Create</a>
 

@@ -4,7 +4,8 @@
     <a class="navbar-brand" href="{{ path("app_blog") }}">Blog</a>
     {% endif %}
     {% if is_granted('ROLE_ADMIN') %}
-    <a class="navbar-brand" href="{{ path("app_post") }}">Admin</a>
+        <a class="navbar-brand" href="{{ path("app_post") }}">Admin</a>
+        <a class="navbar-brand" href="{{ path("app_tag") }}">Tags</a>
     {% endif %}
     <div class="navbar-nav" style="text-align:end;float:none;margin:0.5rem;">
             {% if not app.user %}
