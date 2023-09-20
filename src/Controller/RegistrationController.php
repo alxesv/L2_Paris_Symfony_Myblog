@@ -23,28 +23,32 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
+            try {
+                // encode the plain password
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+                $user->setCreatedAt(new \DateTimeImmutable(
+                        'now',
+                        new \DateTimeZone('Europe/Paris')
+                    )
+                );
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+                // do anything else you need here, like send an email
+                $this->addFlash('message', "Vous êtes bien enregistré(e) !");
+                return $userAuthenticator->authenticateUser(
                     $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-            $user->setCreatedAt(new \DateTimeImmutable(
-                'now',
-                new \DateTimeZone('Europe/Paris')
-            )
-            );
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
-
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
+                    $authenticator,
+                    $request
+                );
+            }catch (\Exception $e){
+                $this->addFlash('error', 'Une erreur s\'est produite lors de l\'inscription : ' . $e->getMessage());
+            }
         }
 
         return $this->render('registration/register.html.twig', [

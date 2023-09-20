@@ -8,6 +8,12 @@
 </style>
 
 <div class="example-wrapper text-center">
+    {% for message in app.flashes('message') %}
+        <p class="flash__message">{{ message }}</p>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <p class="flash__error">{{ message }}</p>
+    {% endfor %}
     <h1>Welcome</h1>
 <div class="container-fluid dflex">
     <div class="card">
