@@ -1,8 +1,32 @@
 {% extends 'base.html.twig' %}
 {% block title %} Blog home {% endblock %}
 {% block body %}
-
+    <div class="container my-md-4">
+    <div class="d-flex justify-content-between">
     <h1>Liste des posts front</h1>
-    {# include la liste front #}
+        <form action="{{ path('app_blog') }}">
+            <input
+                    type="search"
+                    name="q"
+                    class="form-control"
+                    placeholder="Search title..."
+                    aria-label="Search"
+            >
+        </form>
+    </div>
+    </div>
+    <div class="container" style="margin-top: 2rem">
+    {% if posts|length > 0 %}
+    {% for post in posts %}
+        {{ include("post/_post.html.twig") }}
+    {% endfor %}
+    {% else %}
+        <div class="my-md-4">
+            <div class="alert alert-info">
+                No post found
+            </div>
+        </div>
+    {% endif %}
+    </div>
 
 {% endblock %}
