@@ -31,7 +31,6 @@ class EditPostType extends AbstractType
             ->add('title')
             ->add('summary')
             ->add('content')
-            ->add('slug')
             ->add('publicated_at', DateTimeType::class, [
                 'empty_data' => function () {
                     return new \DateTime(); // Met la date actuelle par défaut

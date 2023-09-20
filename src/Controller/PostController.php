@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Spipu\Html2Pdf\Html2Pdf;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 
 
 
@@ -61,6 +63,19 @@ class PostController extends AbstractController
             throw $this->createNotFoundException('Le post n\'existe pas.');
         }
 
+        $image = $post->getImage();
+
+        try {
+            if ($image) {
+                $imageFile = $this->getParameter('brochures_directory') . '/' . $image;
+                if (file_exists($imageFile)) {
+                    unlink($imageFile);
+                }
+            }
+        } catch (FileException $e){
+
+        }
+
         $entityManager->remove($post);
         $entityManager->flush();
 
@@ -100,7 +115,7 @@ class PostController extends AbstractController
      * @throws \Exception
      */
     #[Route('/back/post/create', name: 'app_post_create')]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
@@ -110,6 +125,11 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setCreatedAt(new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris')));
             $post->setUser($this->getUser());
+
+
+            $title = $form->get('title')->getData();
+            $slug = $slugger->slug($title)->lower();
+            $post->setSlug($slug);
 
             $imageFile = $form->get('image')->getData();
 
@@ -142,7 +162,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/back/post/edit/{id}', name: 'app_post_edit')]
-    public function edit(Request $request, EntityManagerInterface $entityManager, $id): Response
+    public function edit(Request $request, EntityManagerInterface $entityManager, $id, SluggerInterface $slugger): Response
     {
         $post = $entityManager->getRepository(Post::class)->find($id);
         $form = $this->createForm(EditPostType::class, $post);
@@ -153,6 +173,10 @@ class PostController extends AbstractController
 
             $imageFile =$form->get('image')->getData();
             $previousImagePath = $post->getImage();
+
+            $title = $form->get('title')->getData();
+            $slug = $slugger->slug($title)->lower();
+            $post->setSlug($slug);
 
             if ($imageFile instanceof UploadedFile) {
                 // Générer un nom de fichier unique en utilisant l'horodatage et une partie aléatoire

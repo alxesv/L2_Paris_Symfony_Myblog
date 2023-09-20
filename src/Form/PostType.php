@@ -8,6 +8,7 @@ use DateTime;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -25,7 +26,6 @@ class PostType extends AbstractType
             ->add('title')
             ->add('summary')
             ->add('content')
-            ->add('slug')
             ->add('publicated_at', DateTimeType::class, [
                 'data' => new DateTime(timezone: new \DateTimeZone('Europe/Paris')),
                 'constraints' => [
