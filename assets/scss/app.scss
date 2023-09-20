@@ -373,3 +373,176 @@ body#blog_search .post-metadata {
   width: 150px;
 }
 
+.cards_container{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  box-shadow: 10px 5px 5px lightgray;
+  border-radius: 10px;
+  background-color: #f6f6f6;
+
+  &__container{
+    display: flex;
+    flex-direction: row;
+
+  }
+
+  &__hypertext{
+    font-size: 22px;
+
+    &--underline_off:hover{
+      text-decoration: none;
+    }
+
+    &--no_margin{
+      margin: 0;
+    }
+  }
+
+  &__date{
+    font-size: 15px;
+    color: lightgray;
+    margin: 0 0 5px 0;
+  }
+
+  &__content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 0 10px 10px;
+
+    &--row{
+      flex-direction: row;
+      align-items: center;
+      padding: 5px 5px 5px 10px;
+    }
+  }
+
+  &__image{
+    width: 200px;
+    height: 200px;
+    border-radius: 10px 0 0 0;
+    object-fit: fill;
+  }
+
+  &__text{
+    margin: 0 0 10px 0;
+  }
+
+  &__publish-info{
+    display: flex;
+    gap: 15px;
+  }
+
+}
+
+.operation__button{
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+
+  &--edit{
+    background-color: #007dff;
+    color: white;
+
+    &:hover{
+      background-color: #0060f0;
+    }
+  }
+
+  &--long{
+    width: 20%;
+    margin: 10px 0 10px 0;
+  }
+
+  &--delete{
+    background-color: #e74a3b;
+    color: white;
+
+    &:hover{
+      background-color: #d04a3b;
+    }
+  }
+
+}
+
+.post-list-wrapper {
+
+  .post-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+
+    h1 {
+      margin: 0;
+    }
+
+    .operation__button--create {
+      background-color: #007dff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+
+      &:hover {
+        background-color: #0060f0;
+      }
+    }
+  }
+}
+
+
+@function opacity($color, $opacity) {
+  @return rgba($color, $opacity);
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+}
+
+.alert {
+  padding: 15px;
+  background-color: rgba(187, 187, 187, 0.5);
+  font-size: 20px;
+  color: #fff;
+  border: 1px solid #bbb;
+  @include border-radius(1px);
+  transition: opacity 0.2s ease-in;
+
+  .close {
+    position: relative;
+    top: -10px;
+    right: -10px;
+    float: right;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  &.close {
+    opacity: 0;
+  }
+
+  &.success {
+    border-color: green;
+    background-color: rgba(0, 128, 0, 0.5);
+  }
+
+  &.error {
+    border-color: red;
+    background: rgba(255, 0, 0, 0.5);
+  }
+}
+
+
+
+

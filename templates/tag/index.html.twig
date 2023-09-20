@@ -1,31 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}liste des tags{% endblock %}
+{% block title %}Liste des tags{% endblock %}
 
 {% block body %}
 
-    <div class="example-wrapper">
+    <div class="post-list-wrapper">
         {% for message in app.flashes('message') %}
-            <p class="flash__message">{{ message }}</p>
+            <div class="alert success">{{ message }}<a href="#" class="close">&times;</a></div>
         {% endfor %}
-        {% for message in app.flashes('error') %}
-            <p class="flash__error">{{ message }}</p>
-        {% endfor %}
-        <h1>Liste des tags:</h1>
 
-        <a href="{{ path('app_tag_create') }}">Create</a>
+        {% for message in app.flashes('error') %}
+            <div class="alert error">{{ message }}<a href="#" class="close">&times;</a></div>
+        {% endfor %}
+
+        <div class="post-list-header">
+            <h1>Liste des tags:</h1>
+            <a href="{{ path('app_tag_create') }}" class="operation__button operation__button--edit operation__button--create">
+                Create
+            </a>
+        </div>
 
         {# DEBUT BARRE DE RECHERCHE #}
         {# FIN BARRE DE RECHERCHE #}
         {# DEBUT LISTE POSTS #}
 
-        {% for tag in tags %}
+        <div class="cards_container">
+        {% for tag in pagination %}
             <div class="card">
-                <p>{{ tag.name }}</p>
-                <a href="{{ path('app_tag_edit', {'id': tag.id}) }}">Editer</a>
-                <a href="{{ path('app_tag_delete', {'id': tag.id}) }}">Supprimer</a>
+                <div class="card__content card__content--row">
+                    <a class="card__hypertext" href="{{ path('app_tag_edit', {'id': tag.id}) }}">{{ tag.name }}</a>
+                    <div class="card__operations">
+                        <a href="{{ path('app_tag_edit', {'id': tag.id}) }}" class="card__hypertext--underline_off">
+                            <button type="button" class="operation__button operation__button--edit">
+                                Editer
+                            </button>
+                        </a>
+
+                        <a href="{{ path('app_tag_delete', {'id': tag.id}) }}">
+                            <button type="button" class="operation__button operation__button--delete">
+                                Supprimer
+                            </button>
+                        </a>
+                    </div>
+                </div>
             </div>
         {% endfor %}
+        </div>
+
+        {# Affichage des liens de pagination #}
+        <div class="pagination">
+            {{ knp_pagination_render(pagination) }}
+        </div>
         {# FIN LISTE POSTS #}
 
     </div>

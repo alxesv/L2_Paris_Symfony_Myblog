@@ -10,6 +10,7 @@
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.15",
+        "knplabs/knp-paginator-bundle": "^6.2",
         "knplabs/knp-snappy-bundle": "^1.9",
         "league/commonmark": "^2.4",
         "phpdocumentor/reflection-docblock": "^5.3",

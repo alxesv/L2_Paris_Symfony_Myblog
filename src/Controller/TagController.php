@@ -7,6 +7,7 @@ use App\Entity\Tag;
 use App\Form\EditPostType;
 use App\Form\TagType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -18,14 +19,21 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class TagController extends AbstractController
 {
     #[Route('/back/tag', name: 'app_tag')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
     {
-        $postEntity = $entityManager->getRepository(Tag::class);
-        $tags = $postEntity->findAll();
+        $tagRepository = $entityManager->getRepository(Tag::class);
+        $query = $tagRepository->createQueryBuilder('t')
+            ->orderBy('t.name', 'ASC')
+            ->getQuery();
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            6
+        );
 
         return $this->render('tag/index.html.twig', [
-            'tags' => $tags,
-
+            'pagination' => $pagination,
         ]);
     }
 
