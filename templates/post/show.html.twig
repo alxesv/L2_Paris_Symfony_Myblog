@@ -10,6 +10,9 @@
             <span class="metadata"><i class="fa fa-calendar"></i> {{ post.publicatedAt|format_datetime('long', 'medium', '', 'UTC') }}</span>
             <span class="metadata"><i class="fa fa-user"></i> {{ post.user.username }}</span>
         </p>
+        {% for tag in post.tag %}
+            <span class="badge badge-primary">{{ tag.name }}</span>
+        {% endfor %}
 
 
         <img src="https://picsum.photos/seed/{{ post.slug }}/200/300" alt="" style="float:left;padding-right:2rem">
