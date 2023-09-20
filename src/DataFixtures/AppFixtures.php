@@ -75,7 +75,7 @@ final class AppFixtures extends Fixture
             $post->setPublicatedAt($publicatedAt);
             $post->setUser($author);
             $post->addTag(...$tags);
-            $post->setImage("https://picsum.photos/seed/$title/1200/350");
+            $post->setImage("https://picsum.photos/seed/$slug/1200/350");
             $post->setCreatedAt(new \DateTimeImmutable('now - '.random_int(1, 100).'days'));
 
             $manager->persist($post);
