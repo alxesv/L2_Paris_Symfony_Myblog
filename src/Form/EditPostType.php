@@ -4,17 +4,23 @@ namespace App\Form;
 
 use App\Entity\Post;
 use App\Entity\Tag;
+use App\Entity\User;
 use DateTime;
+use DateTimeImmutable;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 
-class PostType extends AbstractType
+class EditPostType extends AbstractType
 {
     /**
      * @throws \Exception
@@ -27,24 +33,29 @@ class PostType extends AbstractType
             ->add('content')
             ->add('slug')
             ->add('publicated_at', DateTimeType::class, [
-                'data' => new DateTime(timezone: new \DateTimeZone('Europe/Paris')),
+                'empty_data' => function () {
+                    return new \DateTime(); // Met la date actuelle par défaut
+                },
                 'constraints' => [
                     new GreaterThanOrEqual([
-                        'value' => 'today',
+                        'value'  => 'today',
                         'message' => 'La date ne peut pas être antérieure à aujourd\'hui.',
                     ]),
                 ],
             ])
             ->add('image', FileType::class, [
                 'label' => 'Image (JPG, PNG, GIF, etc.)',
-                'mapped' => true,
+                'mapped' => false,
+                'required'=>false,
             ])
             ->add('tag', EntityType::class, [
                 'class' => Tag::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true, // Définir cette option sur true
+                'expanded' => true,
             ]);
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

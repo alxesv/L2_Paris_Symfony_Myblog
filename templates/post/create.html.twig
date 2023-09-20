@@ -6,6 +6,7 @@
     <h1>Create</h1>
     {{ include('post/_form.html.twig',{
         form:form,
+        tags:tags,
         'button_label':'create'|trans,
     }, with_context =  false) }}
 {% endblock %}
