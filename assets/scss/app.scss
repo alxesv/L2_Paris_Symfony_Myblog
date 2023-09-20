@@ -359,3 +359,17 @@ body#blog_search .post-metadata {
   font-size: 16px;
   margin-bottom: 8px;
 }
+
+.dflex {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0;
+}
+
+.dflex .card {
+  padding: 2rem;
+  border: 1px solid darkblue;
+  border-radius: 5%;
+  border-top: 0;
+  width: 150px;
+}
