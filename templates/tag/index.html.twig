@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}liste des posts{% endblock %}
+
+{% block body %}
+
+    <div class="example-wrapper">
+        <h1>Liste de vos posts:</h1>
+
+        <a href="{{ path('app_tag_create') }}">Create</a>
+
+        {# DEBUT BARRE DE RECHERCHE #}
+        {# FIN BARRE DE RECHERCHE #}
+        {# DEBUT LISTE POSTS #}
+
+        {% for tag in tags %}
+            <div class="card">
+                <p>{{ tag.name }}</p>
+                <a href="{{ path('app_tag_edit', {'id': tag.id}) }}">Editer</a>
+                <a href="{{ path('app_tag_delete', {'id': tag.id}) }}">Supprimer</a>
+            </div>
+        {% endfor %}
+        {# FIN LISTE POSTS #}
+
+    </div>
+{% endblock %}
