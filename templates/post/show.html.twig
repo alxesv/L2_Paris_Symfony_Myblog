@@ -3,12 +3,12 @@
 {% block title %}Detail du post{% endblock %}
 {% block body %}
 {% for message in app.flashes('message') %}
-    <div class="alert success">{{ message }}<a href="#" class="close">&times;</a></div>
+    <div class="alert alert--home success" id="message_{{ loop.index }}">{{ message }}<a href="#" class="close" onclick="closeMessage({{ loop.index }})">&times;</a></div>
 {% endfor %}
 
-        {% for message in app.flashes('error') %}
-            <div class="alert error">{{ message }}<a href="#" class="close">&times;</a></div>
-        {% endfor %}
+{% for message in app.flashes('error') %}
+    <div class="alert alert--home error" id="error_{{ loop.index }}">{{ message }}<a href="#" class="close" onclick="closeMessage({{ loop.index }})">&times;</a></div>
+{% endfor %}
     <article class="post" style="margin:0 5rem; min-height: 400px">
         <h1>{{ post.title }}</h1>
 
