@@ -23,42 +23,49 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class PostController extends AbstractController
 {
-    #[Route('/post', name: 'app_post_front')]
-    public function listFront(EntityManagerInterface $entityManager): Response
-    {
-        $postRepository = $entityManager->getRepository(Post::class);
-
-        // Créer une requête personnalisée pour sélectionner les articles publiés
-        $queryBuilder = $postRepository->createQueryBuilder('p')
-            ->where('p.publicated_at <= :currentDate')
-            ->setParameter('currentDate', new \DateTime(timezone: new \DateTimeZone("Europe/Paris")));
-
-        // Exécutez la requête
-        $posts = $queryBuilder->getQuery()->getResult();
-
-        return $this->render('post/post.html.twig', [
-            'posts' => $posts,
-        ]);
-    }
-
     #[Route('/back/post', name: 'app_post')]
     public function index(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
     {
+        $tagEntity = $entityManager->getRepository(Tag::class);
+        $allTags = $tagEntity->findAll();
         $postEntity = $entityManager->getRepository(Post::class);
-        $query = $postEntity->createQueryBuilder('p')
-            ->where('p.user = :user')
-            ->setParameter('user', $this->getUser())
-            ->orderBy('p.createdAt', 'ASC')
-            ->getQuery();
+
+        if ($request->query->get('q')) {
+            $posts = $postEntity->createQueryBuilder('p')
+                ->where('p.title LIKE :title')
+                ->setParameter('title', '%' . $request->query->get('q') . '%')
+                ->andWhere('p.user = :user')
+                ->setParameter('user', $this->getUser())
+                ->orderBy('p.publicated_at', 'DESC')
+                ->getQuery()
+                ->getResult();
+        } else {
+            $posts = $postEntity->createQueryBuilder('p')
+                ->where('p.user = :user')
+                ->setParameter('user', $this->getUser())
+                ->orderBy('p.publicated_at', 'DESC')
+                ->getQuery();
+        }
+        if($request->query->get('tag')){
+            $tag = $tagEntity->findOneBy(['name' => $request->query->get('tag')]);
+            foreach ($posts as $key => $post) {
+                if($post->getTag()->contains($tag)){
+                    continue;
+                }else{
+                    unset($posts[$key]);
+                }
+            }
+        }
 
         $pagination = $paginator->paginate(
-            $query,
+            $posts,
             $request->query->getInt('page', 1),
             6
         );
 
         return $this->render('post/index.html.twig', [
             'pagination' => $pagination,
+            'tags' => $allTags,
         ]);
     }
 
