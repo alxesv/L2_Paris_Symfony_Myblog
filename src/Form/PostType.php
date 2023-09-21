@@ -44,7 +44,7 @@ class PostType extends AbstractType
                 'class' => Tag::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true, // Définir cette option sur true
+                'expanded' => true,
             ]);
     }
 
