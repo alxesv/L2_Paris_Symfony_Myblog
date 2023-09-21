@@ -10,7 +10,7 @@
     <div class="container cards_container" style="margin-top: 2rem">
     {% if posts|length > 0 %}
     {% for post in posts %}
-        {{ include("post/_post.html.twig", {'admin': 'false'}) }}
+        {{ include("post/_post.html.twig", {admin: false}) }}
     {% endfor %}
     {% else %}
         <div class="my-md-4">

@@ -24,7 +24,7 @@
         <div class="cards_container">
             {% if pagination|length > 0 %}
                 {% for post in pagination %}
-                    {{ include("post/_post.html.twig", {'admin': 'true'}) }}
+                    {{ include("post/_post.html.twig", {admin: true}) }}
                 {% endfor %}
             {% else %}
                 <div class="my-md-4">
