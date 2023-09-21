@@ -11,6 +11,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\Tag;
 use App\Entity\User;
@@ -77,6 +78,19 @@ final class AppFixtures extends Fixture
             $post->addTag(...$tags);
             $post->setImage("default.avif");
             $post->setCreatedAt(new \DateTimeImmutable('now - '.random_int(1, 100).'days'));
+
+            foreach (range(1, 5) as $i) {
+                /** @var User $commentAuthor */
+                $possibleAuthors = ['JaneDoe', 'TomDoe', 'JohnDoe'];
+                $commentAuthor = $this->getReference($possibleAuthors[0 === $i ? 0 : random_int(0, \count($possibleAuthors) - 1)]);
+
+                $comment = new Comment();
+                $comment->setAuthor($commentAuthor);
+                $comment->setContent($this->getRandomText(random_int(255, 512)));
+                $comment->setPublicatedAt(new \DateTimeImmutable('now - '.random_int(1, 100).'days'));
+
+                $post->addComment($comment);
+            }
 
             $manager->persist($post);
         }

@@ -2,8 +2,14 @@
 
 {% block title %}Detail du post{% endblock %}
 {% block body %}
+{% for message in app.flashes('message') %}
+    <div class="alert success">{{ message }}<a href="#" class="close">&times;</a></div>
+{% endfor %}
 
-    <article class="post" style="margin:0 5rem">
+        {% for message in app.flashes('error') %}
+            <div class="alert error">{{ message }}<a href="#" class="close">&times;</a></div>
+        {% endfor %}
+    <article class="post" style="margin:0 5rem; min-height: 400px">
         <h1>{{ post.title }}</h1>
 
         <p class="post-metadata">
@@ -24,4 +30,28 @@
         <span><a href="{{ path("app_post_download", {'id': post.id}) }}" target="_blank"><i class="fa fa-download"></i>Download as pdf</a></span>
         {% endif %}
     </article>
+
+
+
+    <div class="comments" style="display:inline-block">
+        <h3>
+            <i class="fa fa-comments" aria-hidden="true"></i> {{  post.comments|length }} {{ 'Comments' }}
+        </h3>
+        {% if app.user %}
+        <div class="post-comment">
+            {{ render(controller('App\\Controller\\HomeController::commentForm', {'post':post})) }}
+        </div>
+    {% else %}
+        <div class="post-comment">
+            <p>You must be logged in to comment</p>
+            {% endif %}
+        {% for comment in comments %}
+            {{ include('post/_comment.html.twig') }}
+        {% else %}
+            <div class="post-comment">
+                <p>{{ 'No comments' }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}

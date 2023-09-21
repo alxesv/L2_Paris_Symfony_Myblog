@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\Tag;
 use App\Form\EditPostType;
@@ -109,12 +110,15 @@ class PostController extends AbstractController
     {
         $postEntity = $entityManager->getRepository(Post::class);
         $post = $postEntity->find($id);
+        $commentEntity = $entityManager->getRepository(Comment::class);
+        $comments = $commentEntity->findBy(['post' => $post], ['publicated_at' => 'DESC']);
 
         if (!$post) {
             throw $this->createNotFoundException('Le post n\'existe pas.');
         }
 
         return $this->render('post/show.html.twig', [
+            'comments' => $comments,
             'post' => $post,
         ]);
     }
@@ -250,5 +254,23 @@ class PostController extends AbstractController
             'form' => $form->createView(),
             'tags' => $tags
         ]);
+    }
+
+    #[Route('/post/comment/delete/{id}', name: 'app_comment_delete')]
+    public function deleteComment($id, EntityManagerInterface $entityManager){
+        $commentRepository = $entityManager->getRepository(Comment::class);
+        $comment = $commentRepository->find($id);
+
+        if (!$comment) {
+            throw $this->createNotFoundException('Le commentaire n\'existe pas.');
+        }
+        try {
+            $entityManager->remove($comment);
+            $entityManager->flush();
+            $this->addFlash('message', 'Le commentaire a bien été supprimé !');
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Une erreur s\'est produite lors de la suppression du commentaire : ' . $e->getMessage());
+        }
+        return $this->redirectToRoute('app_post_show', ['id' => $comment->getPost()->getId()]);
     }
 }
