@@ -21,12 +21,20 @@
         </div>
 
         <div class="nametag_container">
-        {% for tag in tags %}
-            <div class="nametag">
-                <a class="nametag__title" href="{{ path('app_tag_edit', {'id': tag.id}) }}">{{ tag.name }}</a>
-                <a href="{{ path('app_tag_delete', {'id': tag.id}) }}" class="nametag__link close">&times;</a>
-            </div>
-        {% endfor %}
+            {% if tags|length > 0 %}
+                {% for tag in tags %}
+                    <div class="nametag">
+                        <a class="nametag__title" href="{{ path('app_tag_edit', {'id': tag.id}) }}">{{ tag.name }}</a>
+                        <a href="{{ path('app_tag_delete', {'id': tag.id}) }}" class="nametag__link close">&times;</a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="my-md-4">
+                    <div class="alert alert-info">
+                        No tag found
+                    </div>
+                </div>
+            {% endif %}
         </div>
 
         {# FIN LISTE POSTS #}
