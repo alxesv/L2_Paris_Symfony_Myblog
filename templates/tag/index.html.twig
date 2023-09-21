@@ -24,25 +24,11 @@
         {# FIN BARRE DE RECHERCHE #}
         {# DEBUT LISTE POSTS #}
 
-        <div class="cards_container">
+        <div class="nametag_container">
         {% for tag in pagination %}
-            <div class="card">
-                <div class="card__content card__content--row">
-                    <a class="card__hypertext" href="{{ path('app_tag_edit', {'id': tag.id}) }}">{{ tag.name }}</a>
-                    <div class="card__operations">
-                        <a href="{{ path('app_tag_edit', {'id': tag.id}) }}" class="card__hypertext--underline_off">
-                            <button type="button" class="operation__button operation__button--edit">
-                                Editer
-                            </button>
-                        </a>
-
-                        <a href="{{ path('app_tag_delete', {'id': tag.id}) }}">
-                            <button type="button" class="operation__button operation__button--delete">
-                                Supprimer
-                            </button>
-                        </a>
-                    </div>
-                </div>
+            <div class="nametag">
+                <a class="nametag__title" href="{{ path('app_tag_edit', {'id': tag.id}) }}">{{ tag.name }}</a>
+                <a href="{{ path('app_tag_delete', {'id': tag.id}) }}" class="nametag__link close">&times;</a>
             </div>
         {% endfor %}
         </div>
