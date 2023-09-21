@@ -83,9 +83,11 @@ class PostController extends AbstractController
 
         try {
             if ($image) {
-                $imageFile = $this->getParameter('brochures_directory') . '/' . $image;
-                if (file_exists($imageFile)) {
-                    unlink($imageFile);
+                if($image != "default.avif") {
+                    $imageFile = $this->getParameter('brochures_directory') . '/' . $image;
+                    if (file_exists($imageFile)) {
+                        unlink($imageFile);
+                    }
                 }
             }
         } catch (FileException $e){
@@ -153,7 +155,11 @@ class PostController extends AbstractController
 
             $imageFile = $form->get('image')->getData();
 
-            if ($imageFile instanceof UploadedFile) {
+            if ($imageFile === null) {
+                // L'utilisateur n'a pas téléchargé d'image, utilisez l'image par défaut
+                $defaultImage = 'default.avif';
+                $post->setImage($defaultImage);
+            } elseif ($imageFile instanceof UploadedFile) {
                 // Générer un nom de fichier unique en utilisant l'horodatage et une partie aléatoire
                 $newFilename = md5(uniqid()) . '.' . $imageFile->guessExtension();
 

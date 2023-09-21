@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\Tag;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +22,7 @@ class HomeController extends AbstractController
     }
 
     #[Route('/blog', name: 'app_blog')]
-    public function blog(EntityManagerInterface $entityManager, Request $request): Response
+    public function blog(EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator): Response
     {
 
         $tagEntity = $entityManager->getRepository(Tag::class);
@@ -55,8 +56,14 @@ class HomeController extends AbstractController
             }
         }
 
+        $pagination = $paginator->paginate(
+            $posts,
+            $request->query->getInt('page', 1),
+            6
+        );
+
         return $this->render('blog/blog.html.twig', [
-            'posts' => $posts,
+            'posts' => $pagination,
             'tags' => $allTags,
         ]);
     }

@@ -22,18 +22,11 @@ class TagController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
     {
         $tagRepository = $entityManager->getRepository(Tag::class);
-        $query = $tagRepository->createQueryBuilder('t')
-            ->orderBy('t.name', 'ASC')
-            ->getQuery();
+        $tags = $tagRepository->findAll();
 
-        $pagination = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            6
-        );
 
         return $this->render('tag/index.html.twig', [
-            'pagination' => $pagination,
+            'tags' => $tags,
         ]);
     }
 

@@ -15,7 +15,7 @@
         {% endfor %}
 
 
-        <img src="https://picsum.photos/seed/{{ post.slug }}/200/300" alt="" style="float:left;padding-right:2rem">
+        <img src="{{ asset('uploads/images/' ~ post.image) }}" alt="post_image" class="card__image--detail" style="float:left;padding-right:2rem">
         <div class="content" style="text-align: justify">
         {{ post.content|markdown_to_html }}
         </div>

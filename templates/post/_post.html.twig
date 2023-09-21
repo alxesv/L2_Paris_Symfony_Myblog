@@ -1,8 +1,33 @@
 <div class="card">
-    <div class="card__content">
-        <a href="{{ path("app_post_show", {'id':post.id}) }}" class="card__hypertext">{{ post.title }}</a>
-        <p class="card__text">{{ post.summary }}</p>
-        <p class="card__date">{{ post.getCreatedAt()|date('Y-m-d H:i:s')}}</p>
+    <div class="card__container">
+        <a href="{{ path('app_post_show', {'id': post.id}) }}">
+            <img src="{{ asset('uploads/images/' ~ post.image) }}" alt="post_image" class="card__image">
+        </a>
+        <div class="card__content">
+            <div class="card__fields">
+                <a href="{{ path('app_post_show', {'id': post.id}) }}" class="card__hypertext">{{ post.title }}</a>
+                <div class="card__publish-info">
+                    <p class="card__date"><i class="fa fa-calendar"></i> {{ post.getPublicatedAt()|format_datetime('long', 'medium', '', 'Europe/Paris') }}</p>
+                    <p class="card__date"><i class="fa fa-user"></i> {{ post.user.username }}</p>
+                </div>
+                <p class="card__text">{{ post.summary }}</p>
+            </div>
+
+            {% if admin %}
+                <div class="card__operations">
+                    <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="card__hypertext--underline_off">
+                        <button type="button" class="operation__button operation__button--edit">
+                            Editer
+                        </button>
+                    </a>
+
+                    <a href="{{ path('app_post_delete', {'id': post.id}) }}">
+                        <button type="button" class="operation__button operation__button--delete">
+                            Supprimer
+                        </button>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
     </div>
-    <img src="{{ post.image }}" alt="#" class="card__photo">
 </div>

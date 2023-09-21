@@ -7,13 +7,13 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper text-center">
+<div class="example-wrapper text-center home__container">
     {% for message in app.flashes('message') %}
-        <div class="alert success">{{ message }}<a href="#" class="close">&times;</a></div>
+        <div class="alert success" id="message_{{ loop.index }}">{{ message }}<a href="#" class="close" onclick="closeMessage({{ loop.index }})">&times;</a></div>
     {% endfor %}
 
     {% for message in app.flashes('error') %}
-        <div class="alert error">{{ message }}<a href="#" class="close">&times;</a></div>
+        <div class="alert error" id="error_{{ loop.index }}">{{ message }}<a href="#" class="close" onclick="closeMessage({{ loop.index }})">&times;</a></div>
     {% endfor %}
 
     <h1>Welcome</h1>
