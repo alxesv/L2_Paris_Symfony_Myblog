@@ -31,10 +31,18 @@ class HomeController extends AbstractController
             $posts = $postEntity->createQueryBuilder('p')
                 ->where('p.title LIKE :title')
                 ->setParameter('title', '%' . $request->query->get('q') . '%')
+                ->andWhere('p.publicated_at <= :currentDate')
+                ->setParameter('currentDate', new \DateTime(timezone: new \DateTimeZone("Europe/Paris")))
+                ->orderBy('p.publicated_at', 'DESC')
                 ->getQuery()
                 ->getResult();
         } else {
-            $posts = $postEntity->findAll();
+            $posts = $postEntity->createQueryBuilder('p')
+                ->where('p.publicated_at <= :currentDate')
+                ->setParameter('currentDate', new \DateTime(timezone: new \DateTimeZone("Europe/Paris")))
+                ->orderBy('p.publicated_at', 'DESC')
+                ->getQuery()
+                ->getResult();
         }
         if($request->query->get('tag')){
             $tag = $tagEntity->findOneBy(['name' => $request->query->get('tag')]);
