@@ -1,8 +1,8 @@
-<div class="card">
+<div class="card" style="margin-bottom:2rem;">
+    <img src="{{ post.image }}" alt="#" class="card__photo">
     <div class="card__content">
         <a href="{{ path("app_post_show", {'id':post.id}) }}" class="card__hypertext">{{ post.title }}</a>
-        <p class="card__text">{{ post.summary }}</p>
         <p class="card__date">{{ post.getCreatedAt()|date('Y-m-d H:i:s')}}</p>
+        <p class="card__text">{{ post.summary }}</p>
     </div>
-    <img src="{{ post.image }}" alt="#" class="card__photo">
 </div>
