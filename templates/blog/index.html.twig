@@ -3,15 +3,14 @@
 {% block title %}Best blog ever{% endblock %}
 {% block body %}
 
+{% for message in app.flashes('message') %}
+    <div class="alert alert--home success" id="message_{{ loop.index }}">{{ message }}<a href="#" class="close" onclick="closeMessage({{ loop.index }})">&times;</a></div>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+    <div class="alert alert--home error" id="error_{{ loop.index }}">{{ message }}<a href="#" class="close" onclick="closeMessage({{ loop.index }})">&times;</a></div>
+{% endfor %}
 <div class="text-center centered-container">
-    {% for message in app.flashes('message') %}
-        <div class="alert success" id="message_{{ loop.index }}">{{ message }}<a href="#" class="close" onclick="closeMessage({{ loop.index }})">&times;</a></div>
-    {% endfor %}
-
-    {% for message in app.flashes('error') %}
-        <div class="alert error" id="error_{{ loop.index }}">{{ message }}<a href="#" class="close" onclick="closeMessage({{ loop.index }})">&times;</a></div>
-    {% endfor %}
-
     <h1>Welcome</h1>
 <div class="container-fluid dflex">
     <div class="card">

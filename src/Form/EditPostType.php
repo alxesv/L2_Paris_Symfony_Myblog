@@ -35,12 +35,6 @@ class EditPostType extends AbstractType
                 'empty_data' => function () {
                     return new \DateTime(); // Met la date actuelle par défaut
                 },
-                'constraints' => [
-                    new GreaterThanOrEqual([
-                        'value'  => 'today',
-                        'message' => 'La date ne peut pas être antérieure à aujourd\'hui.',
-                    ]),
-                ],
             ])
             ->add('image', FileType::class, [
                 'label' => 'Image (JPG, PNG, GIF, etc.)',
