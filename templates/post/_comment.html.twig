@@ -1,0 +1,17 @@
+<div class="row post-comment">
+    <a name="comment_{{ comment.id }}"></a>
+    <h4 class="col-sm-4">
+        <strong>{{ comment.author.username }}</strong> {{ 'commented on' }}
+        <strong>{{ comment.publicatedAt|format_datetime('medium', 'short', '', 'UTC') }}</strong>
+    </h4>
+    <div class="col-sm-7">
+        {{ comment.content|markdown_to_html }}
+    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="col-sm-1">
+            <a href="{{ path('app_comment_delete', { 'id': comment.id }) }}" class="btn btn-danger">
+                {{ 'Delete' }}
+            </a>
+        </div>
+    {% endif %}
+</div>
