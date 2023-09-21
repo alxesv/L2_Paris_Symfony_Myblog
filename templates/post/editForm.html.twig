@@ -4,8 +4,16 @@
 
 {% block body %}
     <h1>Edit</h1>
-    {{ include('post/_form.html.twig',{
-        form:form,
-        'button_label':'edit'|trans,
-    }, with_context =  false) }}
+
+    {# Vérifie si l'utilisateur dans le formulaire est le même que celui dans la session #}
+    {% if app.user == form.vars.value.user %}
+        {{ include('post/_form.html.twig', {
+            form: form,
+            'button_label': 'edit'|trans,
+        }, with_context = false) }}
+    {% else %}
+        {# Redirige vers app_post si l'utilisateur est différent #}
+        {% set redirectUrl = path('app_post') %}
+        <p>Vous n'êtes pas autorisé à éditer ce post. <a href="{{ redirectUrl }}">Revenir à la page précédente</a></p>
+    {% endif %}
 {% endblock %}
