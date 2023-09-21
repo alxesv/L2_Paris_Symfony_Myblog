@@ -721,7 +721,7 @@ body#blog_search .post-metadata {
   }
 
   &__checkbox-container{
-    & > #post_tag{
+    & > #post_tag, #edit_post_tag{
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -753,7 +753,7 @@ body#blog_search .post-metadata {
   &__date-container{
     display: flex;
 
-    & > #post_publicated_at{
+    & > #post_publicated_at, #edit_post_publicated_at{
       display: flex;
       flex-direction: row;
       align-items: center;
