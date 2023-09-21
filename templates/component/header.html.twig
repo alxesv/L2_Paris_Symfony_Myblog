@@ -12,6 +12,7 @@
             <a class="nav-item nav-link" href="{{ path("app_login") }}">Login</a>
             <a class="nav-item nav-link" href="{{ path("app_register") }}">Register</a>
             {% else %}
+            <a class="nav-item nav-link" href="{{ path("app_logout") }}">My profile</a>
             <a class="nav-item nav-link" href="{{ path("app_logout") }}">Logout</a>
             {% endif %}
         </div>
