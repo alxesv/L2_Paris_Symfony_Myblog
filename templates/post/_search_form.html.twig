@@ -1,0 +1,16 @@
+<form action="{{ path(target) }}">
+    <input
+            type="search"
+            name="q"
+            class="form-control"
+            placeholder="Search title..."
+            aria-label="Search"
+    >
+    <label for="tag">Tag</label>
+    <select name="tag">
+        <option selected disabled>Choose...</option>
+        {% for tag in tags %}
+            <option value="{{ tag.name }}">{{ tag.name }}</option>
+        {% endfor %}
+    </select>
+</form>
