@@ -23,6 +23,15 @@ services:
         exclude:
             - '../src/DependencyInjection/'
             - '../src/Kernel.php'
+    App\Security\LoginFormAuthenticator:
+        arguments:
+            $logger: '@monolog.logger.connexion'
+    App\Controller\SecurityController:
+        arguments:
+            $logger: '@monolog.logger.connexion'
+    App\Controller\RegistrationController:
+        arguments:
+            $logger: '@monolog.logger.connexion'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
