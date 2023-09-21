@@ -19,6 +19,7 @@
             <a class="nav-item nav-link" href="{{ path("app_login") }}">{{ 'Login'|trans }}</a>
             <a class="nav-item nav-link" href="{{ path("app_register") }}">{{ 'Register'|trans }}</a>
             {% else %}
+            <a class="nav-item nav-link" href="{{ path("app_admin_show", {'id':app.user.id}) }}">{{ 'My profile'|trans }}</a>
             <a class="nav-item nav-link" href="{{ path("app_logout") }}">{{ 'Logout'|trans }}</a>
             {% endif %}
         </div>

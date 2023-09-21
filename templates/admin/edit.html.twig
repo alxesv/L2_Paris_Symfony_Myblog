@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+    <h1>Edit, {{ app.user.username }}</h1>
+
+    {{ include('admin/_form.html.twig', {'button_label': 'Update'}) }}
+    <a href="{{ path('app_admin_reset_pass', {id:app.user.id}) }}">Password Reset</a>
+
+    {{ include('admin/_delete_form.html.twig') }}
+{% endblock %}
