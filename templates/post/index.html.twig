@@ -1,36 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}liste des posts{% endblock %}
+{% block title %}Liste des posts{% endblock %}
 
 {% block body %}
 
-<div class="example-wrapper">
-    {% for message in app.flashes('message') %}
-        <p class="flash__message">{{ message }}</p>
-    {% endfor %}
-    {% for message in app.flashes('error') %}
-        <p class="flash__error">{{ message }}</p>
-    {% endfor %}
-    <h1>Liste de vos posts:</h1>
+    <div class="post-list-wrapper">
+        {% for message in app.flashes('message') %}
+            <div class="alert success">{{ message }}<a href="#" class="close">&times;</a></div>
+        {% endfor %}
 
-    <a href="{{ path('app_post_create')}}">Create</a>
-    {# DEBUT BARRE DE RECHERCHE #}
-    {# FIN BARRE DE RECHERCHE #}
-    {# DEBUT LISTE POSTS #}
-    {% for post in posts %}
-        <div class="card">
-            <div class="card__content">
-                <a href="{{ post.image }}" class="card__hypertext">{{ post.title }}</a>
-                <p class="card__text">{{ post.summary }}</p>
-                <p class="card__date">{{ post.getPublicatedAt()|date('Y-m-d H:i:s')}}</p>
-            </div>
-            <img src="{{ asset('uploads/images/' ~ post.image) }}" alt="post_image" style="width: 100px; height: 100px">
-            <a href="{{ path('app_post_show', {'id': post.id}) }}">Détail</a>
-            <a href="{{ path('app_post_edit', {'id': post.id}) }}">Editer</a>
-            <a href="{{ path('app_post_delete', {'id': post.id}) }}">Supprimer</a>
+        {% for message in app.flashes('error') %}
+            <div class="alert error">{{ message }}<a href="#" class="close">&times;</a></div>
+        {% endfor %}
+
+        <div class="post-list-header">
+            <h1>Liste de vos posts:</h1>
+            <a href="{{ path('app_post_create') }}" class="operation__button operation__button--edit operation__button--create">
+                Create
+            </a>
         </div>
-    {% endfor %}
-    {# FIN LISTE POSTS #}
 
-</div>
+        <div class="cards_container">
+            {% for post in pagination %}
+                <div class="card">
+                    <div class="card__container">
+                        <a href="{{ path('app_post_show', {'id': post.id}) }}">
+                            <img src="{{ asset('uploads/images/' ~ post.image) }}" alt="post_image" class="card__image">
+                        </a>
+                        <div class="card__content">
+                            <div class="card__fields">
+                                <a href="{{ path('app_post_show', {'id': post.id}) }}" class="card__hypertext">{{ post.title }}</a>
+                                <div class="card__publish-info">
+                                    <p class="card__date"><i class="fa fa-calendar"></i> {{ post.getPublicatedAt()|format_datetime('long', 'medium', '', 'Europe/Paris') }}</p>
+                                    <p class="card__date"><i class="fa fa-user"></i> {{ post.user.username }}</p>
+                                </div>
+                                <p class="card__text">{{ post.summary }}</p>
+                            </div>
+
+                            <div class="card__operations">
+                                <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="card__hypertext--underline_off">
+                                    <button type="button" class="operation__button operation__button--edit">
+                                        Editer
+                                    </button>
+                                </a>
+
+                                <a href="{{ path('app_post_delete', {'id': post.id}) }}">
+                                    <button type="button" class="operation__button operation__button--delete">
+                                        Supprimer
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Afficher la pagination -->
+        <div class="pagination">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
 {% endblock %}

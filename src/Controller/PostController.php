@@ -7,6 +7,7 @@ use App\Entity\Tag;
 use App\Form\EditPostType;
 use App\Form\PostType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -41,14 +42,23 @@ class PostController extends AbstractController
     }
 
     #[Route('/back/post', name: 'app_post')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
     {
         $postEntity = $entityManager->getRepository(Post::class);
-        $posts = $postEntity->findBy(["user" => $this->getUser()], ["createdAt" => "ASC"]);
+        $query = $postEntity->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->setParameter('user', $this->getUser())
+            ->orderBy('p.createdAt', 'ASC')
+            ->getQuery();
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            6
+        );
 
         return $this->render('post/index.html.twig', [
-            'posts' => $posts,
-
+            'pagination' => $pagination,
         ]);
     }
 
