@@ -4,12 +4,12 @@
                 type="search"
                 name="q"
                 class="form-control form__input--margin"
-                placeholder="Search title..."
-                aria-label="Search"
+                placeholder="{{ 'Search title'|trans }}..."
+                aria-label="{{ 'Search'|trans }}"
         >
         <label for="tag" style="display: none">Tag</label>
         <select name="tag" class="form-control ">
-            <option selected disabled>Search tag...</option>
+            <option selected disabled>{{ 'Search tag'|trans }}...</option>
             {% for tag in tags %}
                 <option value="{{ tag.name }}">{{ tag.name }}</option>
             {% endfor %}

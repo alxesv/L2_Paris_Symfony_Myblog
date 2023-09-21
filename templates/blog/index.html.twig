@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Best blog ever{% endblock %}
+{% block title %}{{ 'Best blog ever'|trans }}{% endblock %}
 {% block body %}
 
 <div class="text-center centered-container">
@@ -17,7 +17,7 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Front</h5>
-            <a href="{{ path("app_blog") }}" class="btn btn-primary">Enter</a>
+            <a href="{{ path("app_blog") }}" class="btn btn-primary">{{ 'Enter'|trans }}</a>
         </div>
     </div>
 
@@ -25,22 +25,22 @@
         <div class="card-body">
             <h5 class="card-title">Back</h5>
             {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path("app_post") }}" class="btn btn-primary">Enter</a>
+            <a href="{{ path("app_post") }}" class="btn btn-primary">{{ 'Enter'|trans }}</a>
             {% else %}
-                <span style="font-size: 14px">Login as admin</span>
+                <span style="font-size: 14px">{{ 'Login as admin'|trans }}</span>
             {% endif %}
         </div>
     </div>
 </div>
     {% if app.user %}
-        <p class="info__username">Logged in as {{ app.user.username }}</p>
-        <a class="info__button--red" href="{{ path("app_logout") }}">Logout</a>
+        <p class="info__username">{{ 'Logged in as'|trans }} {{ app.user.username }}</p>
+        <a class="info__button--red" href="{{ path("app_logout") }}">{{ 'Logout'|trans }}</a>
     {% else %}
         <div class="info__not-connected">
-            <p class="info__username">Not logged in</p>
+            <p class="info__username">{{ 'Not logged in'|trans }}</p>
             <div class="info__button-container">
-                <a class="info__button" href="{{ path("app_register") }}">Register</a>
-                <a class="info__button" href="{{ path("app_login") }}">Login</a>
+                <a class="info__button" href="{{ path("app_register") }}">{{ 'Register'|trans }}</a>
+                <a class="info__button" href="{{ path("app_login") }}">{{ 'Login'|trans }}</a>
             </div>
         </div>
     {% endif %}

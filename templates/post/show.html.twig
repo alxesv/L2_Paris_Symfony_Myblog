@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Detail du post{% endblock %}
+{% block title %}{{ 'Post detail'|trans }}{% endblock %}
 {% block body %}
 {% for message in app.flashes('message') %}
     <div class="alert success">{{ message }}<a href="#" class="close">&times;</a></div>
@@ -27,7 +27,7 @@
         </div>
         {% if app.user %}
         <div class="clearfix"></div>
-        <span><a href="{{ path("app_post_download", {'id': post.id}) }}" target="_blank"><i class="fa fa-download"></i>Download as pdf</a></span>
+        <span><a href="{{ path("app_post_download", {'id': post.id}) }}" target="_blank"><i class="fa fa-download"></i>{{ 'Download as pdf'|trans }}</a></span>
         {% endif %}
     </article>
 
@@ -35,7 +35,7 @@
 
     <div class="comments" style="display:inline-block">
         <h3>
-            <i class="fa fa-comments" aria-hidden="true"></i> {{  post.comments|length }} {{ 'Comments' }}
+            <i class="fa fa-comments" aria-hidden="true"></i> {{  post.comments|length }} {{ 'Comments'|trans }}
         </h3>
         {% if app.user %}
         <div class="post-comment">
@@ -43,8 +43,9 @@
         </div>
     {% else %}
         <div class="post-comment">
-            <p>You must be logged in to comment</p>
+            <p>{{ 'You must be logged in to comment'|trans }}</p>
             {% endif %}
+        </div>
         {% for comment in comments %}
             {{ include('post/_comment.html.twig') }}
         {% else %}

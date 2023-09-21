@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
-{% block title %} Blog home {% endblock %}
+{% block title %} {{ 'Blog home'|trans }} {% endblock %}
 {% block body %}
     <div class="container my-md-4">
     <div class="d-flex justify-content-between">
-    <h1>Liste des posts front</h1>
+    <h1>{{ 'Post list'|trans }}</h1>
         {{ include("post/_search_form.html.twig", {target:'app_blog'}) }}
     </div>
     </div>
     <div class="container cards_container" style="margin-top: 2rem">
     {% if posts|length > 0 %}
     {% for post in posts %}
-        {{ include("post/_post.html.twig", {'admin': 'false'}) }}
+        {{ include("post/_post.html.twig", {admin: false}) }}
     {% endfor %}
     {% else %}
         <div class="my-md-4">
             <div class="alert alert-info">
-                No post found
+                {{ 'No post found'|trans }}
             </div>
         </div>
     {% endif %}

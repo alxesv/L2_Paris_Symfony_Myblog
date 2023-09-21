@@ -23,7 +23,7 @@
         {{ include( 'post/_search_form.html.twig', {target:'app_post'})}}
         <div class="cards_container">
             {% for post in pagination %}
-                {{ include("post/_post.html.twig", {'admin': 'true'}) }}
+                {{ include("post/_post.html.twig", {admin: true}) }}
             {% endfor %}
         </div>
 

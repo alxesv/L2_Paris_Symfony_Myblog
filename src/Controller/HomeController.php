@@ -20,6 +20,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class HomeController extends AbstractController
 {
+
+
+    #[Route('/')]
+        public function indexNoLocale(): Response
+        {
+            return $this->redirectToRoute('app_home', ['_locale' => 'en']);
+    }
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
