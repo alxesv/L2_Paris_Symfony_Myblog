@@ -359,19 +359,107 @@ body#blog_search .post-metadata {
   margin-bottom: 8px;
 }
 
-.dflex {
-  display: flex;
-  justify-content: space-around;
-  margin: 2rem 0;
+
+.info{
+
+  &__username{
+    margin-bottom: 10px;
+  }
+
+  &__button{
+    background-color: #007dff;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+
+    &-container{
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+
+    &:hover{
+      text-decoration: none;
+      color: white;
+      background-color: #0060f0;
+    }
+
+    &--red{
+      background-color: #e74a3b;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+
+
+      &:hover{
+        text-decoration: none;
+        color: white;
+        background-color: #d04a3b;
+      }
+    }
+  }
+
+
 }
 
-.dflex .card {
-  padding: 2rem;
-  border: 1px solid darkblue;
-  border-radius: 5%;
-  border-top: 0;
-  width: 150px;
+
+.dflex{
+
+  display: flex;
+  margin: 2rem 0;
+  justify-content: center;
+  width: 100%;
+  gap: 10%;
+
+
+  & > .card{
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    box-sizing: border-box;
+    width: 250px;
+
+    & > .card-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      & .card-title {
+        font-size: 22px;
+        margin: 0;
+      }
+
+      & > .btn{
+        background-color: #007bff;
+        color: #fff;
+        padding: 8px 16px;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+
+        &:hover{
+          background-color: #0056b3;
+        }
+
+        & > span{
+          font-size: 14px;
+        }
+      }
+    }
+
+  }
 }
+
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
 
 .cards_container{
   display: flex;
