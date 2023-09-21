@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
-{% block title %} Blog home {% endblock %}
+{% block title %} {{ 'Blog home'|trans }} {% endblock %}
 {% block body %}
     <div class="container my-md-4">
     <div class="d-flex justify-content-between">
-    <h1>Liste des posts front</h1>
+    <h1>{{ 'Post list'|trans }}</h1>
         {{ include("post/_search_form.html.twig", {target:'app_blog'}) }}
     </div>
     </div>
@@ -15,7 +15,7 @@
     {% else %}
         <div class="my-md-4">
             <div class="alert alert-info">
-                No post found
+                {{ 'No post found'|trans }}
             </div>
         </div>
     {% endif %}

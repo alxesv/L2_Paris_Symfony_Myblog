@@ -10,14 +10,14 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            {{ 'You are logged in as'|trans }} {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">{{ 'Logout'|trans }}</a>
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
+    <h1 class="h3 mb-3 font-weight-normal">{{ 'Please sign in'|trans }}</h1>
+    <label for="inputUsername">{{ 'Username'|trans }}</label>
     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
+    <label for="inputPassword">{{ 'Password'|trans }}</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
@@ -25,10 +25,10 @@
     >
 
     <button class="btn btn-md btn-primary" type="submit" style="margin-top:0.5rem">
-        Sign in
+        {{ 'Sign in'|trans }}
     </button>
 
-    <a href="{{ path('app_register') }}">Register</a>
-    <a href="{{ path('app_forgot_password_request') }}">Reset password</a>
+    <a href="{{ path('app_register') }}">{{ 'Register'|trans }}</a>
+    <a href="{{ path('app_forgot_password_request') }}">{{ 'Reset password'|trans }}</a>
 </form>
 {% endblock %}
