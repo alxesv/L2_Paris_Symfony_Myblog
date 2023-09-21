@@ -4,22 +4,7 @@
     <div class="container my-md-4">
     <div class="d-flex justify-content-between">
     <h1>Liste des posts front</h1>
-        <form action="{{ path('app_blog') }}">
-            <input
-                    type="search"
-                    name="q"
-                    class="form-control"
-                    placeholder="Search title..."
-                    aria-label="Search"
-            >
-            <label for="tag">Tag</label>
-            <select name="tag">
-                <option selected disabled>Choose...</option>
-                {% for tag in tags %}
-                    <option value="{{ tag.name }}">{{ tag.name }}</option>
-                {% endfor %}
-            </select>
-        </form>
+        {{ include("post/_search_form.html.twig", {target:'app_blog'}) }}
     </div>
     </div>
     <div class="container" style="margin-top: 2rem">
