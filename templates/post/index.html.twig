@@ -6,12 +6,13 @@
 
     <div class="post-list-wrapper">
         {% for message in app.flashes('message') %}
-            <div class="alert success">{{ message }}<a href="#" class="close">&times;</a></div>
+            <div class="alert success" id="message_{{ loop.index }}">{{ message }}<a href="#" class="close" onclick="closeMessage({{ loop.index }})">&times;</a></div>
         {% endfor %}
 
         {% for message in app.flashes('error') %}
-            <div class="alert error">{{ message }}<a href="#" class="close">&times;</a></div>
+            <div class="alert error" id="error_{{ loop.index }}">{{ message }}<a href="#" class="close" onclick="closeMessage({{ loop.index }})">&times;</a></div>
         {% endfor %}
+
 
         <div class="post-list-header">
             <h1>Liste de vos posts:</h1>
@@ -22,37 +23,7 @@
         {{ include( 'post/_search_form.html.twig', {target:'app_post'})}}
         <div class="cards_container">
             {% for post in pagination %}
-                <div class="card">
-                    <div class="card__container">
-                        <a href="{{ path('app_post_show', {'id': post.id}) }}">
-                            <img src="{{ asset('uploads/images/' ~ post.image) }}" alt="post_image" class="card__image">
-                        </a>
-                        <div class="card__content">
-                            <div class="card__fields">
-                                <a href="{{ path('app_post_show', {'id': post.id}) }}" class="card__hypertext">{{ post.title }}</a>
-                                <div class="card__publish-info">
-                                    <p class="card__date"><i class="fa fa-calendar"></i> {{ post.getPublicatedAt()|format_datetime('long', 'medium', '', 'Europe/Paris') }}</p>
-                                    <p class="card__date"><i class="fa fa-user"></i> {{ post.user.username }}</p>
-                                </div>
-                                <p class="card__text">{{ post.summary }}</p>
-                            </div>
-
-                            <div class="card__operations">
-                                <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="card__hypertext--underline_off">
-                                    <button type="button" class="operation__button operation__button--edit">
-                                        Editer
-                                    </button>
-                                </a>
-
-                                <a href="{{ path('app_post_delete', {'id': post.id}) }}">
-                                    <button type="button" class="operation__button operation__button--delete">
-                                        Supprimer
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{ include("post/_post.html.twig", {'admin': 'true'}) }}
             {% endfor %}
         </div>
 
@@ -61,4 +32,7 @@
             {{ knp_pagination_render(pagination) }}
         </div>
     </div>
+
 {% endblock %}
+
+

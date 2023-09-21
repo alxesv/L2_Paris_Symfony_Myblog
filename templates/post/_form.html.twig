@@ -18,23 +18,33 @@
     {{ form_errors(form.content) }}
 </div>
 
+
 <div class="form-group">
-    {{ form_label(form.publicated_at) }}
-    {{ form_widget(form.publicated_at) }}
+    <div class="form__container--date">
+        <legend class="col-form-label col-sm-2 col-form-label required">Publicated At</legend>
+        <div class="form__date-container">
+            {{ form_widget(form.publicated_at) }}
+        </div>
+    </div>
     {{ form_errors(form.publicated_at) }}
 </div>
 
 
+
 <div class="form-group">
-    {{ form_label(form.image) }}
-    {{ form_widget(form.image, { 'attr': {'class': 'form-control-file'} }) }}
+    <div class="form__container--image">
+        {{ form_widget(form.image, { 'attr': {'class': 'form-control-file form__image'} }) }}
+    </div>
     {{ form_errors(form.image) }}
 </div>
 
-<div class="form-group">
+
+<div class="form-group form__container form__container--tag">
     {{ form_label(form.tag) }}
-    {{ form_widget(form.tag) }}
     {{ form_errors(form.tag) }}
+    <div class="form__checkbox-container">
+        {{ form_widget(form.tag) }}
+    </div>
 </div>
 
 <button type="submit" class="{{ button_css|default('btn btn-primary') }}">
