@@ -1,0 +1,19 @@
+app_home:
+  path: /
+  controller: App\Controller\HomeController::index
+
+app_blog:
+  path: /blog
+  controller: App\Controller\HomeController::blog
+
+app_login:
+  path: /login
+  controller: App\Controller\SecurityController::login
+
+app_register:
+  path: /register
+  controller: App\Controller\RegistrationController::register
+
+app_post_show:
+  path: /post/show/{id}
+  controller: App\Controller\PostController::show

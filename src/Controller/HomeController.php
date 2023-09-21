@@ -8,6 +8,7 @@ use App\Entity\Tag;
 use App\Entity\User;
 use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -19,6 +20,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class HomeController extends AbstractController
 {
+
+
+    #[Route('/')]
+        public function indexNoLocale(): Response
+        {
+            return $this->redirectToRoute('app_home', ['_locale' => 'en']);
+    }
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
@@ -28,7 +36,7 @@ class HomeController extends AbstractController
     }
 
     #[Route('/blog', name: 'app_blog')]
-    public function blog(EntityManagerInterface $entityManager, Request $request): Response
+    public function blog(EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator): Response
     {
 
         $tagEntity = $entityManager->getRepository(Tag::class);
@@ -62,8 +70,14 @@ class HomeController extends AbstractController
             }
         }
 
+        $pagination = $paginator->paginate(
+            $posts,
+            $request->query->getInt('page', 1),
+            6
+        );
+
         return $this->render('blog/blog.html.twig', [
-            'posts' => $posts,
+            'posts' => $pagination,
             'tags' => $allTags,
         ]);
     }

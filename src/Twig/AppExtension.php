@@ -1,30 +1,32 @@
 <?php
 
-
 namespace App\Twig;
 
 use Symfony\Component\Intl\Locales;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class AppExtension extends AbstractExtension
+final class AppExtension extends AbstractExtension
 {
-   private $localeCodes;
-   private $locales;
+    private readonly array $localeCodes;
+
+
+    private ?array $locales = null;
 
     public function __construct(string $locales)
     {
         $localeCodes = explode('|', $locales);
         sort($localeCodes);
-        $this->localCodes = $localeCodes;
+        $this->localeCodes = $localeCodes;
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('locales', [$this, 'getLocales']),
+            new TwigFunction('locales', $this->getLocales(...)),
         ];
     }
+
 
     public function getLocales(): array
     {
@@ -34,12 +36,9 @@ class AppExtension extends AbstractExtension
 
         $this->locales = [];
         foreach ($this->localeCodes as $localeCode) {
-            $this->locales[] = [
-                'code' => $localeCode,
-                'name' => Locales::getName($localeCode, $localeCode)
-            ];
+            $this->locales[] = ['code' => $localeCode, 'name' => Locales::getName($localeCode, $localeCode)];
         }
+
         return $this->locales;
     }
-
 }

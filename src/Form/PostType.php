@@ -38,12 +38,13 @@ class PostType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => 'Image (JPG, PNG, GIF, etc.)',
                 'mapped' => true,
+                'required'=>false,
             ])
             ->add('tag', EntityType::class, [
                 'class' => Tag::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true, // Définir cette option sur true
+                'expanded' => true,
             ]);
     }
 

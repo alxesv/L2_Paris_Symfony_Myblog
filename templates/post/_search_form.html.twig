@@ -1,16 +1,18 @@
-<form action="{{ path(target) }}">
-    <input
-            type="search"
-            name="q"
-            class="form-control"
-            placeholder="Search title..."
-            aria-label="Search"
-    >
-    <label for="tag" style="margin:1rem">Tag</label>
-    <select name="tag">
-        <option selected disabled>Choose...</option>
-        {% for tag in tags %}
-            <option value="{{ tag.name }}">{{ tag.name }}</option>
-        {% endfor %}
-    </select>
+<form action="{{ path(target) }}" class="form">
+    <div class="form__container">
+        <input
+                type="search"
+                name="q"
+                class="form-control form__input--margin"
+                placeholder="{{ 'Search title'|trans }}..."
+                aria-label="{{ 'Search'|trans }}"
+        >
+        <label for="tag" style="display: none">Tag</label>
+        <select name="tag" class="form-control ">
+            <option selected disabled>{{ 'Search tag'|trans }}...</option>
+            {% for tag in tags %}
+                <option value="{{ tag.name }}">{{ tag.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
 </form>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="JiEhxTc" resname="edit">
+        <source>edit</source>
+        <target>__edit</target>
+      </trans-unit>
+      <trans-unit id="KuKEZ2." resname="title.comment_error">
+        <source>title.comment_error</source>
+        <target>__title.comment_error</target>
+      </trans-unit>
+      <trans-unit id="J76H6bc" resname="label.create_post">
+        <source>label.create_post</source>
+        <target>__label.create_post</target>
+      </trans-unit>
+      <trans-unit id="_ohHsMM" resname="create">
+        <source>create</source>
+        <target>Créer</target>
+      </trans-unit>
+      <trans-unit id="xNiR6ah" resname="Add comment">
+        <source>Add comment</source>
+        <target>Commenter</target>
+      </trans-unit>
+      <trans-unit id="9z36Rni" resname="Publish comment">
+        <source>Publish comment</source>
+        <target>Poster</target>
+      </trans-unit>
+      <trans-unit id="u3I07BJ" resname="Register">
+        <source>Register</source>
+        <target>Inscription</target>
+      </trans-unit>
+      <trans-unit id="nWMiwfT" resname="Login">
+        <source>Login</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="GJpX4fO" resname="commented on">
+        <source>commented on</source>
+        <target>commenté à</target>
+      </trans-unit>
+      <trans-unit id="K5Jf5Fy" resname="Post detail">
+        <source>Post detail</source>
+        <target>Détail du post</target>
+      </trans-unit>
+      <trans-unit id="gZrlaRy" resname="Download as pdf">
+        <source>Download as pdf</source>
+        <target>Télécharger en tant que pdf</target>
+      </trans-unit>
+      <trans-unit id="4.dwIy4" resname="You must be logged in to comment">
+        <source>You must be logged in to comment</source>
+        <target>Vous devez être connecté pour commenter</target>
+      </trans-unit>
+      <trans-unit id="RkkZ5Cb" resname="Search title">
+        <source>Search title</source>
+        <target>Rechercher par titre</target>
+      </trans-unit>
+      <trans-unit id="ScJmuqq" resname="Search">
+        <source>Search</source>
+        <target>_Rechercher</target>
+      </trans-unit>
+      <trans-unit id="ojvZEoP" resname="Search tag">
+        <source>Search tag</source>
+        <target>Rechercher par tag</target>
+      </trans-unit>
+      <trans-unit id="acVpEs4" resname="You are logged in as">
+        <source>You are logged in as</source>
+        <target>Vous êtes connecté en tant que</target>
+      </trans-unit>
+      <trans-unit id="0FJ_Sz1" resname="Logout">
+        <source>Logout</source>
+        <target>Déconnexion</target>
+      </trans-unit>
+      <trans-unit id="dDUw20Q" resname="Please sign in">
+        <source>Please sign in</source>
+        <target>Veuillez vous connecter</target>
+      </trans-unit>
+      <trans-unit id="47ienTP" resname="Username">
+        <source>Username</source>
+        <target>Nom d'utilisateur</target>
+      </trans-unit>
+      <trans-unit id="588_9PF" resname="Password">
+        <source>Password</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="v9QCsvb" resname="Sign in">
+        <source>Sign in</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="4O3_s6c" resname="Reset password">
+        <source>Reset password</source>
+        <target>Réinitialiser le mot de passe</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>Accueil</target>
+      </trans-unit>
+      <trans-unit id="ZgNrg3u" resname="Blog home">
+        <source>Blog home</source>
+        <target>Accueil blog</target>
+      </trans-unit>
+      <trans-unit id="xu5zZ_v" resname="Post list">
+        <source>Post list</source>
+        <target>Liste des posts</target>
+      </trans-unit>
+      <trans-unit id="Xs4_Qb9" resname="No post found">
+        <source>No post found</source>
+        <target>Aucun post trouvé</target>
+      </trans-unit>
+      <trans-unit id="SYX.Wew" resname="Best blog ever">
+        <source>Best blog ever</source>
+        <target>Meilleur blog de tous les temps</target>
+      </trans-unit>
+      <trans-unit id="3IZZ221" resname="Enter">
+        <source>Enter</source>
+        <target>Entrer</target>
+      </trans-unit>
+      <trans-unit id="aBXCDHu" resname="Login as admin">
+        <source>Login as admin</source>
+        <target>Connexion admin</target>
+      </trans-unit>
+      <trans-unit id="10Yi6cO" resname="Logged in as">
+        <source>Logged in as</source>
+        <target>Connecté en tant que</target>
+      </trans-unit>
+      <trans-unit id="tiN6OpI" resname="Not logged in">
+        <source>Not logged in</source>
+        <target>Pas connecté</target>
+      </trans-unit>
+      <trans-unit id="NV958p1" resname="Comments">
+        <source>Comments</source>
+        <target>Commentaires</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
