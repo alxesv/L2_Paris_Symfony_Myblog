@@ -126,7 +126,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/post/download/{id}', name: 'app_post_download')]
-    #[IsGranted(User::ROLE_USER)]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function downloadAsPdf($id, EntityManagerInterface $entityManager): void
     {
         $html2pdf = new Html2Pdf();

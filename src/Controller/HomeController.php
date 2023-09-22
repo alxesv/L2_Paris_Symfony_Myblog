@@ -83,7 +83,7 @@ class HomeController extends AbstractController
     }
 
     #[Route('/comment/{postId}/new', name: 'app_add_comment', methods: ['POST'])]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function commentNew(
         #[CurrentUser] User $user,
         Request $request,
