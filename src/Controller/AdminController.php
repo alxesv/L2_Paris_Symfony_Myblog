@@ -24,7 +24,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class AdminController extends AbstractController
 {
     #[Route('/profile/{id}/show', name: 'app_admin_show', methods: ['GET', 'POST'])]
-    #[IsGranted('USER_SHOW', 'user')]
+    #[IsGranted('USER_SHOW', 'user', 'Ce compte ne vous appartient pas !')]
     public function show(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         return $this->render('admin/show.html.twig', [
@@ -32,7 +32,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/profile/{id}/edit', name: 'app_admin_edit', methods: ['GET', 'POST'])]
-    #[IsGranted('USER_EDIT', 'user')]
+    #[IsGranted('USER_EDIT', 'user', 'Ce compte ne vous appartient pas !')]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UserType::class, $user);
@@ -50,7 +50,7 @@ class AdminController extends AbstractController
         ]);
     }
     #[Route('/profile/{id}/password_reset', name: 'app_admin_reset_pass', methods: ['GET', 'POST'])]
-    #[IsGranted('USER_RESET_PASSWORD', 'user')]
+    #[IsGranted('USER_RESET_PASSWORD', 'user', 'Ce compte ne vous appartient pas !')]
     public function passwordReset(Request $request, User $user, EntityManagerInterface $entityManager,  UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $form = $this->createForm(passwordResetType::class, $user);
@@ -75,7 +75,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/profile/{id}/delete', name: 'app_admin_delete', methods: ['POST'])]
-    #[IsGranted('USER_DELETE', 'user')]
+    #[IsGranted('USER_DELETE', 'user', 'Ce compte ne vous appartient pas !')]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
