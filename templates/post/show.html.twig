@@ -27,7 +27,12 @@
         </div>
         {% if app.user %}
         <div class="clearfix"></div>
-        <span><a href="{{ path("app_post_download", {'id': post.id}) }}" target="_blank"><i class="fa fa-download"></i>{{ 'Download as pdf'|trans }}</a></span>
+        <a href="{{ path("app_post_download", {'id': post.id}) }}" target="_blank">
+            <button type="button" class="download__button">
+                <i class="fa fa-download"></i>
+                {{ 'Download as pdf'|trans }}
+            </button>
+        </a>
         {% endif %}
     </article>
 
@@ -46,6 +51,8 @@
             <p>{{ 'You must be logged in to comment'|trans }}</p>
             {% endif %}
         </div>
+
+        <div class="cards_container">
         {% for comment in comments %}
             {{ include('post/_comment.html.twig') }}
         {% else %}
@@ -53,6 +60,7 @@
                 <p>{{ 'No comments' }}</p>
             </div>
         {% endfor %}
+        </div>
     </div>
 
 {% endblock %}

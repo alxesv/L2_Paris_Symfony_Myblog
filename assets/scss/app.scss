@@ -473,6 +473,16 @@ body#blog_search .post-metadata {
   border-radius: 10px;
   background-color: #f6f6f6;
 
+  &__fields{
+
+
+    &--center{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
   &__container{
     display: flex;
     flex-direction: row;
@@ -792,4 +802,21 @@ body#blog_search .post-metadata {
 
 .comment-form input {
   max-width: 300px;
+}
+
+
+.download__button {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+/* Darker background on mouse-over */
+.download__button:hover {
+  background-color: RoyalBlue;
 }
