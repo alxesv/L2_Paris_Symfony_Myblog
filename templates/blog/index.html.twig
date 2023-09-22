@@ -11,7 +11,7 @@
     <div class="alert alert--home error" id="error_{{ loop.index }}">{{ message }}<a href="#" class="close" onclick="closeMessage({{ loop.index }})">&times;</a></div>
 {% endfor %}
 <div class="text-center centered-container">
-    <h1>Welcome</h1>
+    <h1>{{ "Welcome"|trans }}</h1>
 <div class="container-fluid dflex">
     <div class="card">
         <div class="card-body">

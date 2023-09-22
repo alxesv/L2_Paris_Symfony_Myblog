@@ -511,10 +511,10 @@ body#blog_search .post-metadata {
   }
 
   &__image{
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     border-radius: 10px 0 0 10px;
-    object-fit: contain;
+    object-fit: cover;
 
     &--detail{
       width: 40%;
