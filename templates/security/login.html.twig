@@ -28,7 +28,7 @@
         {{ 'Sign in'|trans }}
     </button>
 
-    <a href="{{ path('app_register') }}">{{ 'Register'|trans }}</a>
-    <a href="{{ path('app_forgot_password_request') }}">{{ 'Reset password'|trans }}</a>
+    <a href="{{ path('app_register') }}" class="btn btn-primary" style="margin-top:0.5rem">{{ 'Register'|trans }}</a>
+    <a href="{{ path('app_forgot_password_request') }}" class="btn btn-primary" style="margin-top:0.5rem">{{ 'Reset password'|trans }}</a>
 </form>
 {% endblock %}
