@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,10 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class RegistrationController extends AbstractController
 {
+    public function __construct(private readonly LoggerInterface $logger)
+    {
+    }
+
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
@@ -41,6 +46,7 @@ class RegistrationController extends AbstractController
                 $entityManager->flush();
                 // do anything else you need here, like send an email
                 $this->addFlash('message', "Vous êtes bien enregistré(e) !");
+                $this->logger->info($user->getUsername()." vient de s'inscrire !");
                 return $userAuthenticator->authenticateUser(
                     $user,
                     $authenticator,

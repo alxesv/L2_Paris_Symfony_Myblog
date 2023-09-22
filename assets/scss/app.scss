@@ -457,7 +457,7 @@ body#blog_search .post-metadata {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 80vh;
 }
 
 .cards_container{
@@ -501,7 +501,7 @@ body#blog_search .post-metadata {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 5px 0 10px 10px;
+    padding: 5px 10px 10px 10px;
 
     &--row{
       flex-direction: row;
@@ -513,8 +513,8 @@ body#blog_search .post-metadata {
   &__image{
     width: 200px;
     height: 200px;
-    border-radius: 10px 0 0 0;
-    object-fit: fill;
+    border-radius: 10px 0 0 10px;
+    object-fit: contain;
 
     &--detail{
       width: 40%;
