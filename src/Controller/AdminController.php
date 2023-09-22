@@ -23,13 +23,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class AdminController extends AbstractController
 {
-    #[Route('{id}/show', name: 'app_admin_show', methods: ['GET', 'POST'])]
+    #[Route('/profile/{id}/show', name: 'app_admin_show', methods: ['GET', 'POST'])]
     public function show(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         return $this->render('admin/show.html.twig', [
         ]);
     }
-    #[Route('{id}/edit', name: 'app_admin_edit', methods: ['GET', 'POST'])]
+    #[Route('/profile/{id}/edit', name: 'app_admin_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UserType::class, $user);
@@ -46,7 +46,7 @@ class AdminController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('{id}/password_reset', name: 'app_admin_reset_pass', methods: ['GET', 'POST'])]
+    #[Route('/profile/{id}/password_reset', name: 'app_admin_reset_pass', methods: ['GET', 'POST'])]
     public function passwordReset(Request $request, User $user, EntityManagerInterface $entityManager,  UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $form = $this->createForm(passwordResetType::class, $user);
@@ -70,7 +70,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_admin_delete', methods: ['POST'])]
+    #[Route('/profile/{id}/delete', name: 'app_admin_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {

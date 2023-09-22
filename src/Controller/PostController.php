@@ -27,7 +27,6 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class PostController extends AbstractController
 {
     #[Route('/back/post', name: 'app_post')]
-    #[IsGranted(User::ROLE_ADMIN)]
     public function index(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
     {
         $tagEntity = $entityManager->getRepository(Tag::class);
@@ -74,7 +73,6 @@ class PostController extends AbstractController
     }
 
     #[Route('/back/post/delete/{id}', name: 'app_post_delete')]
-    #[IsGranted(User::ROLE_ADMIN)]
     public function delete(EntityManagerInterface $entityManager, $id): Response
     {
         $postRepository = $entityManager->getRepository(Post::class);
@@ -146,7 +144,6 @@ class PostController extends AbstractController
      * @throws \Exception
      */
     #[Route('/back/post/create', name: 'app_post_create')]
-    #[IsGranted(User::ROLE_ADMIN)]
     public function create(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $post = new Post();
@@ -205,7 +202,6 @@ class PostController extends AbstractController
     }
 
     #[Route('/back/post/edit/{id}', name: 'app_post_edit')]
-    #[IsGranted(User::ROLE_ADMIN)]
     public function edit(Request $request, EntityManagerInterface $entityManager, $id, SluggerInterface $slugger): Response
     {
         $post = $entityManager->getRepository(Post::class)->find($id);
@@ -263,8 +259,7 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/post/comment/delete/{id}', name: 'app_comment_delete')]
-    #[IsGranted(User::ROLE_ADMIN)]
+    #[Route('/back/comment/delete/{id}', name: 'app_comment_delete')]
     public function deleteComment($id, EntityManagerInterface $entityManager){
         $commentRepository = $entityManager->getRepository(Comment::class);
         $comment = $commentRepository->find($id);
