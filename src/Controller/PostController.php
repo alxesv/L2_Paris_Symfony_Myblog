@@ -73,15 +73,9 @@ class PostController extends AbstractController
     }
 
     #[Route('/back/post/delete/{id}', name: 'app_post_delete')]
-    public function delete(EntityManagerInterface $entityManager, $id): Response
+    #[IsGranted('POST_DELETE', 'post', 'Ce post n\'est pas à vous ! ')]
+    public function delete(EntityManagerInterface $entityManager, Post $post): Response
     {
-        $postRepository = $entityManager->getRepository(Post::class);
-        $post = $postRepository->find($id);
-
-        if (!$post) {
-            throw $this->createNotFoundException('Le post n\'existe pas.');
-        }
-
         $image = $post->getImage();
 
         try {
@@ -202,9 +196,9 @@ class PostController extends AbstractController
     }
 
     #[Route('/back/post/edit/{id}', name: 'app_post_edit')]
-    public function edit(Request $request, EntityManagerInterface $entityManager, $id, SluggerInterface $slugger): Response
+    #[IsGranted('POST_EDIT', 'post', 'Ce post n\'est pas à vous ! ')]
+    public function edit(Request $request, EntityManagerInterface $entityManager, Post $post, SluggerInterface $slugger): Response
     {
-        $post = $entityManager->getRepository(Post::class)->find($id);
         $form = $this->createForm(EditPostType::class, $post);
         $tags = $entityManager->getRepository(Tag::class)->findAll();
         $form->handleRequest($request);
