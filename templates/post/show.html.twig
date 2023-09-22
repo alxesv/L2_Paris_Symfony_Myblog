@@ -57,7 +57,7 @@
             {{ include('post/_comment.html.twig') }}
         {% else %}
             <div class="post-comment">
-                <p>{{ 'No comments' }}</p>
+                <p>{{ 'No comments'|trans }}</p>
             </div>
         {% endfor %}
         </div>

@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <th>{{ "Creation Date"|trans }}</th>
-            <td>{{ app.user.createdAt ? app.user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ app.user.createdAt ? app.user.createdAt|format_datetime('long', 'medium', '', 'UTC') }}</td>
         </tr>
         </tbody>
     </table>

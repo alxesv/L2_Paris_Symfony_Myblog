@@ -165,6 +165,14 @@
         <source>Welcome</source>
         <target>Bienvenue</target>
       </trans-unit>
+      <trans-unit id="3.XPOzA" resname="No comments">
+        <source>No comments</source>
+        <target>Pas de commentaires</target>
+      </trans-unit>
+    <trans-unit id="3.XddzA" resname="Repeat Password">
+      <source>Repeat Password</source>
+      <target>Répéter le mot de passe</target>
+    </trans-unit>
     </body>
   </file>
 </xliff>
