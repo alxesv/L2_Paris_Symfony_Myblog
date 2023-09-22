@@ -82,6 +82,6 @@ class AdminController extends AbstractController
             $entityManager->remove($user);
             $entityManager->flush();
         }
-        return $this->redirectToRoute('app_admin_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 }
