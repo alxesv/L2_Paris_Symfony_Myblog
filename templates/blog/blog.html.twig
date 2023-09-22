@@ -7,7 +7,7 @@
         {{ include("post/_search_form.html.twig", {target:'app_blog'}) }}
     </div>
     </div>
-    <div class="container cards_container" style="margin-top: 2rem">
+    <div class="container cards_container">
     {% if posts|length > 0 %}
     {% for post in posts %}
         {{ include("post/_post.html.twig", {admin: false}) }}

@@ -21,7 +21,7 @@
             </a>
         </div>
         {{ include( 'post/_search_form.html.twig', {target:'app_post'})}}
-        <div class="cards_container">
+        <div class="container cards_container" style="margin-left:-15px">
             {% if pagination|length > 0 %}
                 {% for post in pagination %}
                     {{ include("post/_post.html.twig", {admin: true}) }}
