@@ -223,9 +223,11 @@ class PostController extends AbstractController
                     );
 
                     if ($previousImagePath) {
-                        $oldImagePath = $this->getParameter('brochures_directory') . '/' . $previousImagePath;
-                        if (file_exists($oldImagePath)) {
-                            unlink($oldImagePath);
+                        if($previousImagePath != "default.avif") {
+                            $oldImagePath = $this->getParameter('brochures_directory') . '/' . $previousImagePath;
+                            if (file_exists($oldImagePath)) {
+                                unlink($oldImagePath);
+                            }
                         }
                     }
 
