@@ -532,6 +532,12 @@ body#blog_search .post-metadata {
     gap: 15px;
   }
 
+  &__operations{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
 }
 
 .nametag_container{
@@ -589,6 +595,15 @@ body#blog_search .post-metadata {
 
     &:hover{
       background-color: #0060f0;
+    }
+
+    &-grey{
+      background-color: #2C3E50;
+      color: white;
+
+      &:hover{
+        background-color: #0d1318;
+      }
     }
   }
 
