@@ -1,17 +1,21 @@
-<div class="row post-comment">
-    <a name="comment_{{ comment.id }}"></a>
-    <h4 class="col-sm-4">
-        <strong>{{ comment.author.username }}</strong> {{ 'commented on'|trans }}
-        <strong>{{ comment.publicatedAt|format_datetime('medium', 'short', '', 'UTC') }}</strong>
-    </h4>
-    <div class="col-sm-7">
-        {{ comment.content|markdown_to_html }}
-    </div>
-    {% if is_granted('ROLE_ADMIN') %}
-        <div class="col-sm-1">
-            <a href="{{ path('app_comment_delete', { 'id': comment.id }) }}" class="btn btn-danger">
-                {{ 'Delete' }}
-            </a>
+<div class="card">
+    <div class="card__container">
+        <a name="comment_{{ comment.id }}"></a>
+        <h4 class="col-sm-4">
+            <strong>{{ comment.author.username }}</strong> {{ 'commented on'|trans }}
+            <strong>{{ comment.publicatedAt|format_datetime('medium', 'short', '', 'UTC') }}</strong>
+        </h4>
+        <div class="col-sm-7">
+            <p class="card__text">{{ comment.content|markdown_to_html }}</p>
         </div>
-    {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="card__fields card__fields--center">
+                <a href="{{ path('app_comment_delete', { 'id': comment.id }) }}">
+                    <button type="button" class="operation__button operation__button--delete">
+                        {{ 'Delete' }}
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
 </div>
